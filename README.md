@@ -41,10 +41,12 @@ foreach ($carpeta in @("build", "dist")) {
 }
 & .\.venv\Scripts\python.exe -m PyInstaller --noconfirm --onefile --console --name BibliotecaSENA --icon assets/biblioteca.ico --add-data "assets/biblioteca.ico:assets" --add-data "data/usuarios.csv:data" --add-data "data/libros.csv:data" --add-data "data/ejemplares.csv:data" --add-data "data/prestamos.csv:data" main.py
 if ($LASTEXITCODE -ne 0) { throw "No se pudo generar el ejecutable." }
-$escritorio = Join-Path $env:USERPROFILE "Desktop"
-New-Item -ItemType Directory -Path $escritorio -Force | Out-Null
-Copy-Item "dist/BibliotecaSENA.exe" (Join-Path $escritorio "BibliotecaSENA.exe") -Force
-Write-Host "Creado: $escritorio\BibliotecaSENA.exe"
+$escritorio = [Environment]::GetFolderPath("Desktop")
+$ejecutable = Join-Path $escritorio "BibliotecaSENA.exe"
+Copy-Item "dist/BibliotecaSENA.exe" $ejecutable -Force
+Write-Host "Creado: $ejecutable"
 ```
+
+**svg**
 
 Al abrir `BibliotecaSENA.exe`, se crea `data/` junto al ejecutable y se copian únicamente los CSV que falten. Los cambios se conservan entre ejecuciones; los archivos existentes no se reemplazan. Mantén el ejecutable en una carpeta con permiso de escritura.
