@@ -1,0 +1,2 @@
+id,nombres,documento,clave,tipoRol,estado,estadoSancion,fechaFinSancion
+1,root,1,$2b$12$4mivPH0awE9/0z4kKOrukuBVS3MiDE5gAz9tQBS6fMOBUSA1nKkNC,Administrador,Activo,null,null
